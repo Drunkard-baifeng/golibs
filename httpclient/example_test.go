@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/baifeng/httpclient"
+	"github.com/Drunkard-baifeng/golibs/httpclient"
 )
 
 func Example_basic() {

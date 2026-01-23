@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/baifeng/proxypool"
+	"github.com/Drunkard-baifeng/golibs/proxypool"
 )
 
 func Example_basic() {
