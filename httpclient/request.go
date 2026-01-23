@@ -2,6 +2,7 @@ package httpclient
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -281,8 +282,17 @@ func (c *Client) doRequest(method, urlStr string, body interface{}, opts *Option
 	}
 	defer resp.Body.Close()
 
-	// 读取响应体
-	respBody, err := io.ReadAll(resp.Body)
+	// 读取响应体（处理gzip压缩）
+	var reader io.Reader = resp.Body
+	if resp.Header.Get("Content-Encoding") == "gzip" {
+		gzReader, err := gzip.NewReader(resp.Body)
+		if err != nil {
+			return nil, fmt.Errorf("创建gzip解压器失败: %w", err)
+		}
+		defer gzReader.Close()
+		reader = gzReader
+	}
+	respBody, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, fmt.Errorf("读取响应失败: %w", err)
 	}
