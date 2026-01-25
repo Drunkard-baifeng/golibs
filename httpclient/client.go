@@ -274,6 +274,13 @@ func (c *Client) SetMaxRedirects(maxRedirects int) *Client {
 	return c
 }
 
+// Close 关闭客户端，释放所有连接资源
+func (c *Client) Close() {
+	if c.transport != nil {
+		c.transport.CloseIdleConnections()
+	}
+}
+
 // SetHeaders 设置默认请求头（覆盖）
 func (c *Client) SetHeaders(headers map[string]string) *Client {
 	c.headers = make(map[string]string)
