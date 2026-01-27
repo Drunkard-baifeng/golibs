@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	DefaultBaseURL = "http://127.0.0.1:30001"
+	DefaultBaseURL = "http://127.0.0.1:8081"
 )
 
 // Client 云端API客户端
@@ -121,6 +121,9 @@ func (c *Client) request(method, path string, body interface{}, maxRetries int) 
 		var err error
 
 		url := c.buildURL(path)
+		// logger.Infof("请求URL: %s", url)
+		// logger.Infof("请求方法: %s", method)
+		// logger.Infof("请求体: %v", body)
 
 		if method == "GET" {
 			resp, err = c.client.Get(url, nil)
@@ -162,32 +165,24 @@ func (c *Client) doRequest(path string, body interface{}) (*Response, error) {
 
 // Login 云端登录
 func (c *Client) Login(username, password string) error {
-	resp, err := c.client.Post(c.baseURL+"/api/user/login", map[string]string{
+	resp, err := c.request("POST", "/api/user/login", map[string]string{
 		"username": username,
 		"password": password,
-	}, nil)
+	}, 2)
 	if err != nil {
-		return fmt.Errorf("登录请求失败: %w", err)
+		return err
 	}
 
-	var result Response
-	if err := json.Unmarshal(resp.Body, &result); err != nil {
-		return fmt.Errorf("解析响应失败: %w", err)
-	}
-
-	if result.Code != 200 {
-		return fmt.Errorf(result.Msg)
-	}
+	logger.Infof("登录响应: %s", resp.Msg)
 
 	// 解析 token 获取 uid
-	if data, ok := result.Data.(map[string]interface{}); ok {
+	if data, ok := resp.Data.(map[string]interface{}); ok {
 		if token, ok := data["token"].(string); ok {
 			uid, err := parseJWTUID(token)
 			if err != nil {
 				return fmt.Errorf("解析token失败: %w", err)
 			}
 			c.key = uid
-			logger.Successf("登录成功, uid: %s", uid)
 			return nil
 		}
 	}

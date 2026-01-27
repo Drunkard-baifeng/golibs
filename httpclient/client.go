@@ -74,18 +74,24 @@ func (c *Client) getProxyFunc() func(*http.Request) (*url.URL, error) {
 
 // Config 客户端配置选项
 type Config struct {
-	Timeout         time.Duration
-	MaxRedirects    int
-	Verify          bool
-	Proxy           string
-	ProxyType       string // "http" 或 "socks5"
-	MaxIdleConns    int
-	IdleConnTimeout time.Duration
+	Timeout           time.Duration
+	MaxRedirects      int
+	Verify            bool
+	Proxy             string
+	ProxyType         string // "http" 或 "socks5"
+	MaxIdleConns      int
+	IdleConnTimeout   time.Duration
+	DisableKeepAlives bool // 禁用连接复用（每次请求后立即关闭连接）
 }
 
 // NewWithConfig 使用配置创建HTTP客户端
 func NewWithConfig(cfg Config) *Client {
 	c := New()
+
+	// 禁用 Keep-Alive（必须在设置代理之前，因为会影响 Transport）
+	if cfg.DisableKeepAlives {
+		c.transport.DisableKeepAlives = true
+	}
 
 	if cfg.Timeout > 0 {
 		c.SetTimeout(cfg.Timeout)

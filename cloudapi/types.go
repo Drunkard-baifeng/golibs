@@ -59,7 +59,7 @@ type DataGetResp struct {
 // DataSetReq 修改养号数据请求（指针类型：不传=不修改）
 type DataSetReq struct {
 	ID          uint    `json:"id"`            // 数据ID（必填）
-	Status      *int    `json:"status"`        // 状态：0:未养号,1:养号中,2:养号完成...
+	Status      *int    `json:"status"`        // 状态：0:未养号,1:养号中 2:养号完成, 3:密码错误，4:账号封禁, 5:未实名, 6:停止养号
 	Notes1      *string `json:"notes1"`        // 备注
 	AccData     *string `json:"acc_data"`      // 账号数据
 	NextUseTime *string `json:"next_use_time"` // 下次执行时间 格式：2006-01-02 15:04:05
