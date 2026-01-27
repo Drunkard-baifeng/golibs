@@ -1,5 +1,5 @@
-github.com/Drunkard-baifeng/golibs/httpclient v1.0.2 h1:LkbNLkBNgr65I/sHO5DuQrHFuZprHBLoXr7HQJD1KQ0=
-github.com/Drunkard-baifeng/golibs/httpclient v1.0.2/go.mod h1:YmOSZucYlTf5vewsjq0EnW2TEILB6jhzwvVibwiPIg8=
+github.com/Drunkard-baifeng/golibs/httpclient v1.0.4 h1:0hgTB5xmu+P53LW+vqlbS5T2EIfSDqYvij7ji7kv8H4=
+github.com/Drunkard-baifeng/golibs/httpclient v1.0.4/go.mod h1:YmOSZucYlTf5vewsjq0EnW2TEILB6jhzwvVibwiPIg8=
 github.com/Drunkard-baifeng/golibs/logger v1.0.0 h1:+hP+l2o6PKa2XZPavuX4nR2mtUOWR4nn1lENCajlYQo=
 github.com/Drunkard-baifeng/golibs/logger v1.0.0/go.mod h1:Gd0zll6xdAvej5ErQLfKOsNMhruF2p+lCVEJaYMXzyI=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

@@ -3,7 +3,7 @@ module github.com/Drunkard-baifeng/golibs/cloudapi
 go 1.23.2
 
 require (
-	github.com/Drunkard-baifeng/golibs/httpclient v1.0.2
+	github.com/Drunkard-baifeng/golibs/httpclient v1.0.4
 	github.com/Drunkard-baifeng/golibs/logger v1.0.0
 )
 
