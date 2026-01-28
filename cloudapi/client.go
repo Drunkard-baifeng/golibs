@@ -269,10 +269,11 @@ func (c *Client) DataPost(req *DataPostReq) (uint, error) {
 }
 
 // DataGet 获取养号数据
-func (c *Client) DataGet(configID uint, nextTimeMode string) (*DataGetResp, error) {
+func (c *Client) DataGet(configID uint, nextTimeMode string, includeStatus2 string) (*DataGetResp, error) {
 	resp, err := c.doRequest("/api/number_maintenance/task/data/get", DataGetReq{
-		ConfigID:     configID,
-		NextTimeMode: nextTimeMode,
+		ConfigID:       configID,
+		NextTimeMode:   nextTimeMode,
+		IncludeStatus2: includeStatus2,
 	})
 	if err != nil {
 		return nil, err

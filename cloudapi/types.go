@@ -41,8 +41,9 @@ type DataPostResp struct {
 
 // DataGetReq 获取养号数据请求
 type DataGetReq struct {
-	ConfigID     uint   `json:"config_id"`      // 类别ID（必填）
-	NextTimeMode string `json:"next_time_mode"` // 时间模式：1表示按下次执行时间获取
+	ConfigID       uint   `json:"config_id"`       // 类别ID（必填）
+	NextTimeMode   string `json:"next_time_mode"`  // 时间模式：1表示按下次执行时间获取
+	IncludeStatus2 string `json:"include_status2"` // 是否包含状态2的数据
 }
 
 // DataGetResp 获取养号数据响应
